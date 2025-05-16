@@ -1,0 +1,26 @@
+        isPlaying = false;
+        audioBtn.setAttribute('aria-label', 'Play Love Music');
+        audioBtn.title = 'Play Love Music';
+        audioIcon.innerHTML = '<path d="M3 9v6h4l5 5V4L7 9H3z"/>'; // Play icon
+        document.getElementById('heart-svg').style.animationPlayState = 'paused';
+      } else {
+        const playPromise = audio.play();
+        if (playPromise !== undefined) {
+          playPromise.then(() => {
+            isPlaying = true;
+            audioBtn.setAttribute('aria-label', 'Pause Love Music');
+            audioBtn.title = 'Pause Love Music';
+            audioIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // Pause icon
+            document.getElementById('heart-svg').style.animationPlayState = 'running';
+          }).catch(() => {
+            // Playback prevented. Possibly awaiting user interaction.
+          });
+        }
+      }
+    });
+    // Initialize heart pulse paused (until audio plays)
+    document.getElementById('heart-svg').style.animationPlayState = 'paused';
+  })();
+</script>
+</body>
+</html>
